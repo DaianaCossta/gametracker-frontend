@@ -13,16 +13,17 @@ function FormularioReseña({ juegos, onAgregarReseña }) {
       return;
     }
 
-    const juegoEncontrado = juegos.find(j => j.id === Number(juegoSeleccionado));
+    const juegoEncontrado = juegos.find(j => j._id === juegoSeleccionado);
     
     if (!juegoEncontrado) {
       alert("Selecciona un juego válido");
+      console.log("Juego seleccionado:", juegoSeleccionado);
+      console.log("Juegos disponibles:", juegos);
       return;
     }
 
     const nuevaReseña = {
-      id: Date.now(),
-      juegoId: juegoEncontrado.id,
+      juegoId: juegoEncontrado._id,
       juegoTitulo: juegoEncontrado.titulo,
       texto: textoReseña,
       fecha: new Date().toLocaleDateString('es-ES')
@@ -47,7 +48,7 @@ function FormularioReseña({ juegos, onAgregarReseña }) {
           >
             <option value="">-- Elige un juego --</option>
             {juegos.map((juego) => (
-              <option key={juego.id} value={juego.id}>
+              <option key={juego._id} value={juego._id}>
                 {juego.titulo}
               </option>
             ))}

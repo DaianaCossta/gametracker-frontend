@@ -5,7 +5,7 @@ function TarjetaJuego({ juego, onEliminar }) {
     <div className="tarjeta-juego">
       <button 
         className="btn-eliminar"
-        onClick={() => onEliminar(juego.id)}
+        onClick={() => onEliminar(juego._id)}
         title="Eliminar juego"
       >
         ❌

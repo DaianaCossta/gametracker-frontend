@@ -1,76 +1,79 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import TarjetaJuego from './components/TarjetaJuego';
 import FormularioJuego from './components/FormularioJuego';
 import TarjetaReseña from './components/TarjetaReseña';
 import FormularioReseña from './components/FormularioReseña';
 import EstadisticasPersonales from './components/EstadisticasPersonales';
+import * as api from './services/api';
 
 function App() {
-  const [juegos, setJuegos] = useState([
-  {
-    id: 1,
-    titulo: "The Last of Us",
-    genero: "Aventura",
-    completado: true,
-    puntuacion: 5,
-    horasJugadas: 45,
-    portadaURL: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop"
-  },
-  {
-    id: 2,
-    titulo: "Hollow Knight",
-    genero: "Metroidvania",
-    completado: true,
-    puntuacion: 5,
-    horasJugadas: 60,
-    portadaURL: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=300&fit=crop"
-  },
-  {
-    id: 3,
-    titulo: "Elden Ring",
-    genero: "RPG",
-    completado: false,
-    puntuacion: 4,
-    horasJugadas: 120,
-    portadaURL: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&h=300&fit=crop"
-  }
-]);
+  const [juegos, setJuegos] = useState([]);
+  const [reseñas, setReseñas] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
-  const [reseñas, setReseñas] = useState([
-    {
-      id: 1,
-      juegoId: 1,
-      juegoTitulo: "The Last of Us",
-      texto: "Una obra maestra narrativa. La historia te atrapa desde el primer momento y los personajes son inolvidables.",
-      fecha: "15/10/2025"
-    },
-    {
-      id: 2,
-      juegoId: 2,
-      juegoTitulo: "Hollow Knight",
-      texto: "Un metroidvania perfecto. El diseño de niveles es espectacular y la dificultad está muy bien balanceada.",
-      fecha: "18/10/2025"
+  // Cargar datos cuando la app se monta
+  useEffect(() => {
+    cargarDatos();
+  }, []);
+
+  const cargarDatos = async () => {
+    setCargando(true);
+    try {
+      const juegosData = await api.obtenerJuegos();
+      const reseñasData = await api.obtenerReseñas();
+      setJuegos(juegosData);
+      setReseñas(reseñasData);
+    } catch (error) {
+      console.error('Error al cargar datos:', error);
     }
-  ]);
-
-  const agregarJuego = (nuevoJuego) => {
-    setJuegos([...juegos, nuevoJuego]);
+    setCargando(false);
   };
 
-  const eliminarJuego = (id) => {
-    const juegosActualizados = juegos.filter(juego => juego.id !== id);
-    setJuegos(juegosActualizados);
+  const agregarJuego = async (nuevoJuego) => {
+    try {
+      const juegoGuardado = await api.crearJuego(nuevoJuego);
+      setJuegos([juegoGuardado, ...juegos]);
+    } catch (error) {
+      alert('Error al agregar juego');
+    }
   };
 
-  const agregarReseña = (nuevaReseña) => {
-    setReseñas([...reseñas, nuevaReseña]);
+  const eliminarJuego = async (id) => {
+    try {
+      await api.eliminarJuego(id);
+      setJuegos(juegos.filter(juego => juego._id !== id));
+    } catch (error) {
+      alert('Error al eliminar juego');
+    }
   };
 
-  const eliminarReseña = (id) => {
-    const reseñasActualizadas = reseñas.filter(reseña => reseña.id !== id);
-    setReseñas(reseñasActualizadas);
+  const agregarReseña = async (nuevaReseña) => {
+    try {
+      const reseñaGuardada = await api.crearReseña(nuevaReseña);
+      setReseñas([reseñaGuardada, ...reseñas]);
+    } catch (error) {
+      alert('Error al agregar reseña');
+    }
   };
+
+  const eliminarReseña = async (id) => {
+    try {
+      await api.eliminarReseña(id);
+      setReseñas(reseñas.filter(reseña => reseña._id !== id));
+    } catch (error) {
+      alert('Error al eliminar reseña');
+    }
+  };
+
+  if (cargando) {
+    return (
+      <div className="App">
+        <h1>🎮 GameTracker</h1>
+        <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
@@ -84,13 +87,17 @@ function App() {
         <h2 className="titulo-seccion">📚 Mi Biblioteca</h2>
         <FormularioJuego onAgregarJuego={agregarJuego} />
         <div className="biblioteca">
-          {juegos.map((juego) => (
-            <TarjetaJuego 
-              key={juego.id} 
-              juego={juego}
-              onEliminar={eliminarJuego}
-            />
-          ))}
+          {juegos.length === 0 ? (
+            <p className="mensaje-vacio">No hay juegos todavía. ¡Agrega el primero!</p>
+          ) : (
+            juegos.map((juego) => (
+              <TarjetaJuego 
+                key={juego._id} 
+                juego={juego}
+                onEliminar={eliminarJuego}
+              />
+            ))
+          )}
         </div>
       </section>
 
@@ -106,7 +113,7 @@ function App() {
           ) : (
             reseñas.map((reseña) => (
               <TarjetaReseña 
-                key={reseña.id}
+                key={reseña._id}
                 reseña={reseña}
                 onEliminar={eliminarReseña}
               />
