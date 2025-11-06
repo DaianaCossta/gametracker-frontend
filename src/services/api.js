@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:5000/api';
 
-// ========== JUEGOS ==========
+// JUEGOS 
 
 export const obtenerJuegos = async () => {
   try {
@@ -43,11 +43,11 @@ export const eliminarJuego = async (id) => {
   }
 };
 
-// ========== RESEÑAS ==========
+// RESEÑAS
 
 export const obtenerReseñas = async () => {
   try {
-    const response = await fetch(`${API_URL}/reseñas`);
+    const response = await fetch(`${API_URL}/resenas`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -58,7 +58,7 @@ export const obtenerReseñas = async () => {
 
 export const crearReseña = async (reseña) => {
   try {
-    const response = await fetch(`${API_URL}/reseñas`, {
+    const response = await fetch(`${API_URL}/resenas`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export const crearReseña = async (reseña) => {
 
 export const eliminarReseña = async (id) => {
   try {
-    const response = await fetch(`${API_URL}/reseñas/${id}`, {
+    const response = await fetch(`${API_URL}/resenas/${id}`, {
       method: 'DELETE',
     });
     const data = await response.json();

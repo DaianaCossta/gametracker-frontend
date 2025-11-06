@@ -1,11 +1,12 @@
 import './TarjetaReseña.css';
 
 function TarjetaReseña({ reseña, onEliminar }) {
+  console.log("Reseña recibida:", reseña);
   return (
     <div className="tarjeta-reseña">
       <button 
         className="btn-eliminar-reseña"
-        onClick={() => onEliminar(reseña.id)}
+        onClick={() => onEliminar(reseña._id)}
         title="Eliminar reseña"
       >
         ❌
@@ -17,6 +18,7 @@ function TarjetaReseña({ reseña, onEliminar }) {
       </div>
       
       <p className="reseña-texto">{reseña.texto}</p>
+
     </div>
   );
 }

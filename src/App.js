@@ -22,8 +22,15 @@ function App() {
     try {
       const juegosData = await api.obtenerJuegos();
       const reseñasData = await api.obtenerReseñas();
+      console.log("Reseñas recibidas:", reseñasData); // esto es clave para depurar
       setJuegos(juegosData);
       setReseñas(reseñasData);
+      if (!Array.isArray(reseñasData)) {
+      console.error("La respuesta de reseñas no es un array:", reseñasData);
+      setReseñas([]);
+    } else {
+      setReseñas(reseñasData);
+    }
     } catch (error) {
       console.error('Error al cargar datos:', error);
     }

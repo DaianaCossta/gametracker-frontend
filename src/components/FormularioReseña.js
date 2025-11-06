@@ -37,7 +37,7 @@ function FormularioReseña({ juegos, onAgregarReseña }) {
 
   return (
     <div className="formulario-reseña-container">
-      <h2>✍️ Escribir Nueva Reseña</h2>
+      <h2>Escribir Nueva Reseña</h2>
       
       <form onSubmit={manejarSubmit}>
         <div className="campo">
