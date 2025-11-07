@@ -80,3 +80,30 @@
 .tarjeta-juego:hover .portada-juego {
   transform: scale(1.05);
 }
+
+.btn-editar {
+  position: absolute;
+  top: 10px;
+  right: 55px; /* Lo ponemos al lado del botón eliminar */
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 1.2rem;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-editar:hover {
+  background: rgba(52, 152, 219, 0.9); /* Azul cuando pasas el mouse */
+  transform: scale(1.1);
+}
+
+.btn-editar:active {
+  transform: scale(0.95);
+}

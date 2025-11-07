@@ -1,8 +1,16 @@
 import './TarjetaJuego.css';
 
-function TarjetaJuego({ juego, onEliminar }) {
+function TarjetaJuego({ juego, onEliminar, onEditar }) {
   return (
-    <div className="tarjeta-juego">
+     <div className="tarjeta-juego">
+      <button
+        className="btn-editar"
+        onClick={() => onEditar (juego)}
+        title="Editar juego"
+       >
+        ✏️
+      </button>
+
       <button 
         className="btn-eliminar"
         onClick={() => onEliminar(juego._id)}
