@@ -4,7 +4,7 @@
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-left: 5px solid #667eea;
+  border-left: 5px solid #106837;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -43,18 +43,18 @@
 
 .reseña-header h3 {
   margin: 0;
-  color: #2c3e50;
+  color: #006e4d;
   font-size: 1.3rem;
 }
 
 .reseña-fecha {
-  color: #7f8c8d;
+  color: #7f8d80;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
 .reseña-texto {
-  color: #34495e;
+  color: #073815;
   line-height: 1.6;
   margin: 0;
   font-size: 1rem;

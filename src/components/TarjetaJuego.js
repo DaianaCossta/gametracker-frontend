@@ -1,19 +1,35 @@
 import './TarjetaJuego.css';
 
 function TarjetaJuego({ juego, onEliminar, onEditar }) {
+  
+  const handleEditar = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("¡CLICK EN EDITAR! Juego:", juego.titulo);
+    onEditar(juego);
+  };
+
+  const handleEliminar = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onEliminar(juego._id);
+  };
+
   return (
-     <div className="tarjeta-juego">
+    <div className="tarjeta-juego">
       <button
         className="btn-editar"
-        onClick={() => onEditar (juego)}
+        onClick={handleEditar}
+        type="button"
         title="Editar juego"
-       >
+      >
         ✏️
       </button>
 
       <button 
         className="btn-eliminar"
-        onClick={() => onEliminar(juego._id)}
+        onClick={handleEliminar}
+        type="button"
         title="Eliminar juego"
       >
         ❌

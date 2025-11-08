@@ -1,15 +1,15 @@
 .formulario-container {
-  background: white;
+  background: #60b67a;
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(102, 7, 7, 0.1);
   max-width: 500px;
   margin: 0 auto 40px auto;
 }
 
 .formulario-container h2 {
   margin-top: 0;
-  color: #2c3e50;
+  color: #000000;
   text-align: center;
   margin-bottom: 25px;
 }
@@ -28,13 +28,13 @@ form {
 
 .campo label {
   font-weight: 600;
-  color: #34495e;
+  color: #000000;
   font-size: 0.95rem;
 }
-
+/*borde mas oscuro de cada bloque*/
 .campo input {
   padding: 12px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #106837;
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s;
@@ -42,7 +42,7 @@ form {
 
 .campo input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #d6d6d6;
 }
 
 .campo input[type="range"] {
@@ -61,7 +61,7 @@ form {
   gap: 10px;
   cursor: pointer;
   font-weight: 600;
-  color: #34495e;
+  color: #ffffff;
 }
 
 .campo-checkbox input[type="checkbox"] {
@@ -71,8 +71,8 @@ form {
 }
 
 .btn-agregar {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+  background: linear-gradient(135deg, #ffffff 0%, #24964a 100%);
+  color: rgb(0, 0, 0);
   border: none;
   padding: 15px;
   border-radius: 8px;
@@ -81,19 +81,19 @@ form {
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
 }
-
+/*sombra cuando paso por arriba mouse*/
 .btn-agregar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 65, 27, 0.699);
 }
 
 .btn-agregar:active {
   transform: translateY(0);
 }
-
+/*borde mas oscuro del bloque hs jugadas*/
 .campo input[type="number"] {
   padding: 12px;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #106837;
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s;
@@ -118,4 +118,27 @@ form {
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*estilos para boton de cancelar*/
+.btn-cancelar {
+  background: linear-gradient(135deg, #000000 0%, #24964a 100%);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.btn-cancelar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(127, 140, 141, 0.4);
+}
+
+.btn-cancelar:active {
+  transform: translateY(0);
 }

@@ -15,7 +15,7 @@ function EstadisticasPersonales({ juegos, reseñas }) {
 
   return (
     <div className="estadisticas-container">
-      <h2>📊 Mis Estadísticas</h2>
+      <h2>Mis estadísticas</h2>
       
       <div className="estadisticas-grid">
         <div className="tarjeta-estadistica tarjeta-total">

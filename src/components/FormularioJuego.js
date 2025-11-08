@@ -1,13 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './FormularioJuego.css';
 
-function FormularioJuego({ onAgregarJuego }) {
+function FormularioJuego({ onAgregarJuego, onActualizarJuego, juegoEditando }) {
   const [titulo, setTitulo] = useState("");
   const [genero, setGenero] = useState("");
   const [puntuacion, setPuntuacion] = useState(3);
   const [completado, setCompletado] = useState(false);
   const [horasJugadas, setHorasJugadas] = useState(0);
   const [portadaURL, setPortadaURL] = useState("");
+
+  // Este useEffect se ejecuta cuando cambia juegoEditando
+  // Si hay un juego para editar, llenamos el formulario con sus datos
+  useEffect(() => {
+    if (juegoEditando) {
+      setTitulo(juegoEditando.titulo);
+      setGenero(juegoEditando.genero);
+      setPuntuacion(juegoEditando.puntuacion);
+      setCompletado(juegoEditando.completado);
+      setHorasJugadas(juegoEditando.horasJugadas);
+      setPortadaURL(juegoEditando.portadaURL || "");
+    }
+  }, [juegoEditando]);
+
+  const limpiarFormulario = () => {
+    setTitulo("");
+    setGenero("");
+    setPuntuacion(3);
+    setCompletado(false);
+    setHorasJugadas(0);
+    setPortadaURL("");
+  };
 
   const manejarSubmit = (e) => {
     e.preventDefault();
@@ -17,8 +39,7 @@ function FormularioJuego({ onAgregarJuego }) {
       return;
     }
 
-    const nuevoJuego = {
-      id: Date.now(),
+    const datosJuego = {
       titulo: titulo,
       genero: genero,
       puntuacion: puntuacion,
@@ -27,19 +48,20 @@ function FormularioJuego({ onAgregarJuego }) {
       portadaURL: portadaURL
     };
 
-    onAgregarJuego(nuevoJuego);
+    // Si estamos editando, llamamos a onActualizarJuego
+    // Si no, llamamos a onAgregarJuego
+    if (juegoEditando) {
+      onActualizarJuego(juegoEditando._id, datosJuego);
+    } else {
+      onAgregarJuego(datosJuego);
+    }
 
-    setTitulo("");
-    setGenero("");
-    setPuntuacion(3);
-    setCompletado(false);
-    setHorasJugadas(0);
-    setPortadaURL("");
+    limpiarFormulario();
   };
 
   return (
     <div className="formulario-container">
-      <h2>➕ Agregar Nuevo Juego</h2>
+      <h2>{juegoEditando ? "✏️ Editar Juego" : "➕ Agregar Nuevo Juego"}</h2>
       
       <form onSubmit={manejarSubmit}>
         <div className="campo">
@@ -111,8 +133,18 @@ function FormularioJuego({ onAgregarJuego }) {
         </div>
 
         <button type="submit" className="btn-agregar">
-          Agregar Juego
+          {juegoEditando ? "💾 Guardar Cambios" : "Agregar Juego"}
         </button>
+
+        {juegoEditando && (
+          <button 
+            type="button" 
+            className="btn-cancelar"
+            onClick={limpiarFormulario}
+          >
+            Cancelar
+          </button>
+        )}
       </form>
     </div>
   );

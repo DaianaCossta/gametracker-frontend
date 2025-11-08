@@ -2,7 +2,7 @@ const API_URL = 'http://localhost:5000/api';
 
 // JUEGOS 
 
-export const obtenerJuegos = async () => {
+ export const obtenerJuegos = async () => {
   try {
     const response = await fetch(`${API_URL}/juegos`);
     const data = await response.json();
@@ -11,9 +11,9 @@ export const obtenerJuegos = async () => {
     console.error('Error al obtener juegos:', error);
     return [];
   }
-};
+ };
 
-export const crearJuego = async (juego) => {
+ export const crearJuego = async (juego) => {
   try {
     const response = await fetch(`${API_URL}/juegos`, {
       method: 'POST',
@@ -28,9 +28,26 @@ export const crearJuego = async (juego) => {
     console.error('Error al crear juego:', error);
     throw error;
   }
-};
+ };
 
-export const eliminarJuego = async (id) => {
+ export const actualizarJuego = async (id, juego) => {
+  try {
+    const response = await fetch(`${API_URL}/juegos/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(juego),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al actualizar juego:', error);
+    throw error;
+  }
+  };
+
+ export const eliminarJuego = async (id) => {
   try {
     const response = await fetch(`${API_URL}/juegos/${id}`, {
       method: 'DELETE',
@@ -41,7 +58,7 @@ export const eliminarJuego = async (id) => {
     console.error('Error al eliminar juego:', error);
     throw error;
   }
-};
+ };
 
 // RESEÑAS
 

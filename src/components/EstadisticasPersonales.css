@@ -1,16 +1,20 @@
+
+
+
+
 .estadisticas-container {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #60b67a 0%, #c7e9cf 100%);
   padding: 40px;
   border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(158, 73, 73, 0.1);
   margin: 0 auto;
   max-width: 1200px;
 }
 
 .estadisticas-container h2 {
   text-align: center;
-  color: #2c3e50;
-  font-size: 2.2rem;
+  color: #000000;
+  font-size: 3rem;
   margin-bottom: 40px;
   margin-top: 0;
 }
@@ -23,10 +27,10 @@
 }
 
 .tarjeta-estadistica {
-  background: white;
+  background: rgb(2, 26, 7);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(39, 207, 123, 0.08);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -49,33 +53,13 @@
   flex-shrink: 0;
 }
 
-.tarjeta-total .icono {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.tarjeta-completados .icono {
-  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-}
-
-.tarjeta-progreso .icono {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.tarjeta-promedio .icono {
-  background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
-}
-
-.tarjeta-reseñas .icono {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-}
-
 .estadistica-info {
   flex: 1;
 }
 
 .estadistica-info h3 {
   margin: 0 0 8px 0;
-  color: #34495e;
+  color: #ffffff;
   font-size: 0.95rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -84,13 +68,13 @@
 
 .estadistica-info .numero {
   margin: 0;
-  color: #2c3e50;
+  color: #00ee7f;
   font-size: 2rem;
   font-weight: 700;
 }
 
 .barra-progreso-container {
-  background: white;
+  background: rgb(2, 26, 7);
   padding: 25px;
   border-radius: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -98,7 +82,7 @@
 
 .barra-progreso-container h3 {
   margin: 0 0 15px 0;
-  color: #34495e;
+  color: #ffffff;
   font-size: 1.2rem;
 }
 

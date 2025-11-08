@@ -11,6 +11,7 @@ function App() {
   const [juegos, setJuegos] = useState([]);
   const [reseñas, setReseñas] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [juegoEditando, setJuegoEditando] = useState(null);
 
   // Cargar datos cuando la app se monta
   useEffect(() => {
@@ -46,6 +47,28 @@ function App() {
     }
   };
 
+   //actualizar juego
+  const actualizarJuego = async (id, datosActualizados) => {
+    try {
+      const juegoActualizado = await api.actualizarJuego(id, datosActualizados);
+      // Actualiza la lista de juegos
+      setJuegos(juegos.map(juego => 
+        juego._id === id ? juegoActualizado : juego
+      ));
+      // Limpia el juego que estaba editando
+      setJuegoEditando(null);
+    } catch (error) {
+      alert('Error al actualizar juego');
+    }
+  };
+
+  //preparar juego para editar
+  const prepararEdicion = (juego) => {
+    setJuegoEditando(juego);
+    // scroll hacia el formulario de edicion
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  };
+
   const eliminarJuego = async (id) => {
     try {
       await api.eliminarJuego(id);
@@ -76,23 +99,26 @@ function App() {
   if (cargando) {
     return (
       <div className="App">
-        <h1>🎮 GameTracker</h1>
-        <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>Cargando...</p>
+        <h1>Game Zone</h1>
+        <p style={{ textAlign: 'start', fontSize: '2.5rem' }}>Cargando...</p>
       </div>
     );
   }
 
   return (
     <div className="App">
-      <h1>🎮 GameTracker</h1>
+      <h1>Game Zone</h1>
       
       <section className="seccion">
         <EstadisticasPersonales juegos={juegos} reseñas={reseñas} />
       </section>
 
       <section className="seccion">
-        <h2 className="titulo-seccion">📚 Mi Biblioteca</h2>
-        <FormularioJuego onAgregarJuego={agregarJuego} />
+        <h2 className="titulo-seccion">📚 Biblioteca</h2>
+        <FormularioJuego onAgregarJuego={agregarJuego}
+          onActualizarJuego={actualizarJuego}
+          juegoEditando={juegoEditando} 
+          />
         <div className="biblioteca">
           {juegos.length === 0 ? (
             <p className="mensaje-vacio">No hay juegos todavía. ¡Agrega el primero!</p>
@@ -102,6 +128,7 @@ function App() {
                 key={juego._id} 
                 juego={juego}
                 onEliminar={eliminarJuego}
+                onEditar={prepararEdicion}
               />
             ))
           )}
