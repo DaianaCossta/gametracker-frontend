@@ -5,6 +5,11 @@
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
+
+  position: relative; 
+  display: flex; /* La tarjeta es un contenedor flexible*/
+  flex-direction: column; /* El contenido se apila verticalmente*/
+  height: 100%; /* Asegura que todas las tarjetas tengan la misma altura */
 }
 
 .tarjeta-juego:hover {
@@ -15,7 +20,7 @@
 .tarjeta-juego h2 {
   margin-top: 0;
   font-size: 1.5rem;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 10px;
   margin-bottom: 15px;
 }
@@ -23,6 +28,7 @@
 .tarjeta-juego p {
   margin: 12px 0;
   font-size: 1rem;
+  flex-grow: 1; /* Permite que el párrafo crezca para llenar el espacio disponible */
 }
 
 .tarjeta-juego {
@@ -31,7 +37,7 @@
   color: rgb(0, 0, 0);
   padding: 25px;
   border-radius: 15px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease;
 }
 

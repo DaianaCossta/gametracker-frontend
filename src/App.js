@@ -145,7 +145,7 @@ const prepararEdicionReseña = (reseña) => {
           onActualizarJuego={actualizarJuego}
           juegoEditando={juegoEditando} 
           />
-        <div className="biblioteca">
+        <div className="lista-juegos">
           {juegos.length === 0 ? (
             <p className="mensaje-vacio">No hay juegos todavía. ¡Agrega el primero!</p>
           ) : (

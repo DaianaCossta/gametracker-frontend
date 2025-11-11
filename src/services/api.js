@@ -72,7 +72,7 @@ export const obtenerReseñas = async () => {
     return [];
   }
 };
-
+//crear reseña
 export const crearReseña = async (reseña) => {
   try {
     const response = await fetch(`${API_URL}/resenas`, {
@@ -89,7 +89,7 @@ export const crearReseña = async (reseña) => {
     throw error;
   }
 };
-
+//actualizar reseña
 export const actualizarReseña = async (id, reseña) => {
   try {
     const response = await fetch(`${API_URL}/resenas/${id}`, {
@@ -100,13 +100,18 @@ export const actualizarReseña = async (id, reseña) => {
       body: JSON.stringify(reseña),
     });
     const data = await response.json();
+    //si la respuesta no es ok, ej 400, 404, 500, lanzamos un error
+    if (!response.ok) {
+      throw new Error(data.message || 'Error al actualizar reseña');  
+    }
+    //si la respuesta es ok, retornamos los datos
     return data;
   } catch (error) {
     console.error('Error al actualizar reseña:', error);
     throw error;
   }
 };
-
+//eliminar reseña
 export const eliminarReseña = async (id) => {
   try {
     const response = await fetch(`${API_URL}/resenas/${id}`, {

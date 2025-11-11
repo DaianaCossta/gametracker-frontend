@@ -10,6 +10,9 @@ function FormularioReseña({ juegos, onAgregarReseña, onActualizarReseña, rese
     if (reseñaEditando) {
       setJuegoSeleccionado(reseñaEditando.juegoId);
       setTextoReseña(reseñaEditando.texto);
+    } else { //si no hay reseña para editar, limpiamos el formulario
+      setJuegoSeleccionado("");
+      setTextoReseña("");
     }
   }, [reseñaEditando]);
 
