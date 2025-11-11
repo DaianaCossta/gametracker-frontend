@@ -115,7 +115,7 @@ const actualizarReseña = async (id, datosActualizados) => {
 //Preparar reseña para editar
 const prepararEdicionReseña = (reseña) => {
   setReseñaEditando(reseña);
-  window.scrollTo({ top: 5400, behavior: 'smooth' }); 
+  window.scrollTo({ top: 4000, behavior: 'smooth' }); 
 };
  //Cancelar edición de reseña
  const cancelarEdicionReseña = () => {

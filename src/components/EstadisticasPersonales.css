@@ -1,7 +1,4 @@
 
-
-
-
 .estadisticas-container {
   background: linear-gradient(135deg, #60b67a 0%, #c7e9cf 100%);
   padding: 40px;
@@ -12,9 +9,9 @@
 }
 
 .estadisticas-container h2 {
-  text-align: center;
+  text-align: start;
   color: #000000;
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 40px;
   margin-top: 0;
 }
@@ -27,10 +24,10 @@
 }
 
 .tarjeta-estadistica {
-  background: rgb(2, 26, 7);
+  background: rgba(0, 0, 0, 0.767);
   padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 4px 15px rgba(39, 207, 123, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(29, 148, 88, 0.08);
   display: flex;
   align-items: center;
   gap: 20px;
@@ -44,7 +41,7 @@
 
 .tarjeta-estadistica .icono {
   font-size: 3rem;
-  width: 70px;
+  width: 60px;
   height: 70px;
   display: flex;
   align-items: center;
