@@ -73,3 +73,25 @@
 .btn-agregar-reseña:active {
   transform: translateY(0);
 }
+
+.btn-cancelar-reseña {
+  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 10px;
+}
+
+.btn-cancelar-reseña:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(127, 140, 141, 0.4);
+}
+
+.btn-cancelar-reseña:active {
+  transform: translateY(0);
+}

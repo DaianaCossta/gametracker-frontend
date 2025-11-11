@@ -59,3 +59,25 @@
   margin: 0;
   font-size: 1rem;
 }
+.btn-editar-reseña {
+  position: absolute;
+  top: 15px;
+  right: 55px; /* Al lado del botón eliminar */
+  background: rgba(52, 152, 219, 0.1);
+  border: none;
+  font-size: 1rem;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-editar-reseña:hover {
+  background: rgba(52, 152, 219, 0.9);
+  transform: scale(1.1);
+}
+
+.btn-editar-reseña:active {
+  transform: scale(0.95);
+}

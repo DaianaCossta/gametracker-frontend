@@ -1,12 +1,38 @@
 import './TarjetaReseña.css';
 
-function TarjetaReseña({ reseña, onEliminar }) {
+function TarjetaReseña({ reseña, onEliminar, onEditar }) {
   console.log("Reseña recibida:", reseña);
+  
+  const handleEditar = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("¡Editando reseña!", reseña);
+    onEditar(reseña);
+  };
+
+  const handleEliminar = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onEliminar(reseña._id);
+  };
+
   return (
     <div className="tarjeta-reseña">
+      {/*Botón de editar*/}
+      <button 
+        className="btn-editar-reseña"
+        onClick={handleEditar}
+        type="button"
+        title="Editar reseña"
+      >
+        ✏️
+      </button>
+
+      {/*Botón de eliminar*/}
       <button 
         className="btn-eliminar-reseña"
-        onClick={() => onEliminar(reseña._id)}
+        onClick={handleEliminar}
+        type="button"
         title="Eliminar reseña"
       >
         ❌
@@ -18,7 +44,6 @@ function TarjetaReseña({ reseña, onEliminar }) {
       </div>
       
       <p className="reseña-texto">{reseña.texto}</p>
-
     </div>
   );
 }

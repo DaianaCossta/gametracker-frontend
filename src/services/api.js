@@ -90,6 +90,23 @@ export const crearReseña = async (reseña) => {
   }
 };
 
+export const actualizarReseña = async (id, reseña) => {
+  try {
+    const response = await fetch(`${API_URL}/resenas/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(reseña),
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error al actualizar reseña:', error);
+    throw error;
+  }
+};
+
 export const eliminarReseña = async (id) => {
   try {
     const response = await fetch(`${API_URL}/resenas/${id}`, {

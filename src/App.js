@@ -12,6 +12,7 @@ function App() {
   const [reseñas, setReseñas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [juegoEditando, setJuegoEditando] = useState(null);
+  const [reseñaEditando, setReseñaEditando] = useState(null);
 
   // Cargar datos cuando la app se monta
   useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
     }
     setCargando(false);
   };
-
+  //agregar un juego
   const agregarJuego = async (nuevoJuego) => {
     try {
       const juegoGuardado = await api.crearJuego(nuevoJuego);
@@ -46,7 +47,7 @@ function App() {
       alert('Error al agregar juego');
     }
   };
-
+    //FUNCIONES JUEGOS
    //actualizar juego
   const actualizarJuego = async (id, datosActualizados) => {
     try {
@@ -66,7 +67,7 @@ function App() {
   const prepararEdicion = (juego) => {
     setJuegoEditando(juego);
     // scroll hacia el formulario de edicion
-    window.scrollTo({ top: 300, behavior: 'smooth' });
+    window.scrollTo({ top: 800, behavior: 'smooth' });
   };
 
   const eliminarJuego = async (id) => {
@@ -78,6 +79,8 @@ function App() {
     }
   };
 
+  //FUNCIONES RESEÑAS
+  //agregar reseña
   const agregarReseña = async (nuevaReseña) => {
     try {
       const reseñaGuardada = await api.crearReseña(nuevaReseña);
@@ -94,6 +97,29 @@ function App() {
     } catch (error) {
       alert('Error al eliminar reseña');
     }
+  };
+  
+  //Actualizar reseña
+const actualizarReseña = async (id, datosActualizados) => {
+  try {
+    const reseñaActualizada = await api.actualizarReseña(id, datosActualizados);
+    setReseñas(reseñas.map(reseña => 
+      reseña._id === id ? reseñaActualizada : reseña
+    ));
+    setReseñaEditando(null);
+  } catch (error) {
+    alert('Error al actualizar reseña');
+  }
+};
+
+//Preparar reseña para editar
+const prepararEdicionReseña = (reseña) => {
+  setReseñaEditando(reseña);
+  window.scrollTo({ top: 5400, behavior: 'smooth' }); 
+};
+ //Cancelar edición de reseña
+ const cancelarEdicionReseña = () => {
+    setReseñaEditando(null); 
   };
 
   if (cargando) {
@@ -136,10 +162,13 @@ function App() {
       </section>
 
       <section className="seccion">
-        <h2 className="titulo-seccion">📝 Mis Reseñas</h2>
+        <h2 className="titulo-seccion">📝 Mis reseñas</h2>
         <FormularioReseña 
           juegos={juegos} 
           onAgregarReseña={agregarReseña}
+          onActualizarReseña={actualizarReseña}
+          reseñaEditando={reseñaEditando}
+          onCancelarEdicion={cancelarEdicionReseña}
         />
         <div className="lista-reseñas">
           {reseñas.length === 0 ? (
@@ -150,6 +179,7 @@ function App() {
                 key={reseña._id}
                 reseña={reseña}
                 onEliminar={eliminarReseña}
+                onEditar={prepararEdicionReseña}
               />
             ))
           )}

@@ -1,9 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './FormularioReseña.css';
 
-function FormularioReseña({ juegos, onAgregarReseña }) {
+function FormularioReseña({ juegos, onAgregarReseña, onActualizarReseña, reseñaEditando,onCancelarEdicion }) {
   const [juegoSeleccionado, setJuegoSeleccionado] = useState("");
   const [textoReseña, setTextoReseña] = useState("");
+
+  //useEffect llena el formulario cuando hay una reseña para editar
+  useEffect(() => {
+    if (reseñaEditando) {
+      setJuegoSeleccionado(reseñaEditando.juegoId);
+      setTextoReseña(reseñaEditando.texto);
+    }
+  }, [reseñaEditando]);
+
+  const limpiarFormulario = () => {
+    setJuegoSeleccionado("");
+    setTextoReseña("");
+    
+   //Llama a la función de App.js para limpiar reseñaEditando
+   if (reseñaEditando) {
+        onCancelarEdicion(); 
+    }
+  };
 
   const manejarSubmit = (e) => {
     e.preventDefault();
@@ -17,27 +35,29 @@ function FormularioReseña({ juegos, onAgregarReseña }) {
     
     if (!juegoEncontrado) {
       alert("Selecciona un juego válido");
-      console.log("Juego seleccionado:", juegoSeleccionado);
-      console.log("Juegos disponibles:", juegos);
       return;
     }
 
-    const nuevaReseña = {
+    const datosReseña = {
       juegoId: juegoEncontrado._id,
       juegoTitulo: juegoEncontrado.titulo,
       texto: textoReseña,
       fecha: new Date().toLocaleDateString('es-ES')
     };
 
-    onAgregarReseña(nuevaReseña);
-
-    setJuegoSeleccionado("");
-    setTextoReseña("");
+    //Si estamos editando, llamamos a onActualizarReseña
+    //si no, llamamos a onAgregarReseña
+    if (reseñaEditando) {
+      onActualizarReseña(reseñaEditando._id, datosReseña);
+    } else {
+      onAgregarReseña(datosReseña);
+      limpiarFormulario();
+    }
   };
 
   return (
     <div className="formulario-reseña-container">
-      <h2>Escribir Nueva Reseña</h2>
+      <h2>{reseñaEditando ? "✏️ Editar Reseña" : "📝 Escribir Nueva Reseña"}</h2>
       
       <form onSubmit={manejarSubmit}>
         <div className="campo">
@@ -66,11 +86,23 @@ function FormularioReseña({ juegos, onAgregarReseña }) {
         </div>
 
         <button type="submit" className="btn-agregar-reseña">
-          Publicar Reseña
+          {reseñaEditando ? "💾 Guardar Cambios" : "Publicar Reseña"}
         </button>
+
+        {reseñaEditando && (
+          <button 
+            type="button" 
+            className="btn-cancelar-reseña"
+            onClick={limpiarFormulario}
+          >
+            Cancelar
+          </button>
+        )}
       </form>
     </div>
   );
+
 }
 
 export default FormularioReseña;
+
